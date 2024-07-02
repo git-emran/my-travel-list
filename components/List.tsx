@@ -1,23 +1,24 @@
 "use Cl"
 
-import React from 'react'
+import React, {useState} from 'react'
 import { initialItems, Item } from '@/lib/data';
 
 export default function List() {
+    const [items, setItems] = useState();
+ 
+   
+
+
+
   return (
-    <div className="w-full flex-row flex gap-40 items-center  justify-center h-full">
+    <div className="w-full flex-row flex gap-40 items-center mt-20 justify-center h-full">
       {initialItems.map((item: Item) => (
-        <ul
-          key={item.id}
-          className=" flex-row flex mt-14 items-center text-center justify-center"
-        >
-          <li className='flex font-bold text-xl px-4'>
-            {" "}
-            {item.quantity} {item.description} {item.packed}
-          </li>
+        <div key={item.id} className="flex items-center space-x-4">
+          <span className={`text-lg ${item.packed ? 'line-through': ""}`}>
+            {item.quantity} {item.description}
+          </span>
           <button>❌</button>
-         
-        </ul>
+        </div>
       ))}
     </div>
   );
