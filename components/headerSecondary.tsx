@@ -3,6 +3,7 @@ import HeaderForm from "./HeaderForm";
 import { Item } from "@/lib/data";
 
 const HeaderSecondary: React.FC = () => {
+  
   const [items, setItems] = useState<Item[]>([]); // Define state for items
 
   const addItemToList = (newItem: Item) => {
@@ -12,7 +13,7 @@ const HeaderSecondary: React.FC = () => {
   return (
     <div className="flex flex-row gap-4 items-center justify-center bg-orange-900 h-[3rem] w-full ">
       <p className="text-sm font-normal text-white">Things that I need </p>
-      <HeaderForm addItemToList={addItemToList} />{" "}
+      
       {/* Pass addItemToList function */}
     </div>
   );

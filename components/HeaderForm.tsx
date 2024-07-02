@@ -1,70 +1,68 @@
-"use client";
-
 import React, { useState } from "react";
+import { Item } from "@/lib/data";
 
-export default function HeaderForm() {
-  const [inputValue, setInputValue] = useState("");
-  const [selectedNumber, setSelectedNumber] = useState<number>(1);
+interface HeaderFormProps {
+  addItemToList: (newItem: Item) => void; // Function to add item to list
+}
+
+const HeaderForm: React.FC<HeaderFormProps> = ({ addItemToList }) => {
   const [description, setDescription] = useState("");
-  const [quantity, setQuantity] = useState(5);
-
-  function handleSubmit(e: any) {
-    e.preventDefault(), console.log(e);
-  }
+  const [quantity, setQuantity] = useState(1); // Default quantity
 
   const handleAddItem = () => {
-    if (inputValue.trim() === "") {
+    if (description.trim() === "") {
       return;
     }
+
+    // Create new item object
+    const newItem: Item = {
+      id: Math.random(), // Generate a random ID (replace with your logic)
+      description: description,
+      quantity: quantity,
+      packed: false, // Example default packed status
+    };
+
+    // Call parent component function to add item to list
+    addItemToList(newItem);
+
+    // Clear input fields after adding item
+    setDescription("");
+    setQuantity(1); // Reset to default quantity or clear as needed
   };
-  interface NumberSelectProps {
-    selectedNumber: number;
-    onChange: (value: number) => void;
-  }
 
-  const NumberSelect: React.FC<NumberSelectProps> = ({
-    selectedNumber,
-    onChange,
-  }) => {
-    const numbers = Array.from({ length: 20 }, (_, i) => i + 1);
+  const handleQuantityChange = (value: number) => {
+    setQuantity(value); // Update quantity state
+  };
 
-    return (
+  return (
+    <div className="flex flex-row gap-4 px-4 pb-4 pt-4">
       <select
         value={quantity}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="form-select mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+        onChange={(e) => handleQuantityChange(Number(e.target.value))}
+        className="form-select mt-1 block w-16 pl-3 pr-2 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
       >
-        {numbers.map((number) => (
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((number) => (
           <option key={number} value={number}>
             {number}
           </option>
         ))}
       </select>
-    );
-  };
-
-  return (
-    <div className="flex flex-row px-4 pb-4 pt-4">
-      <NumberSelect
-        selectedNumber={selectedNumber}
-        onChange={setSelectedNumber}
-      />
       <input
         type="text"
         value={description}
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
+        onChange={(e) => setDescription(e.target.value)} // Update description state
         placeholder="Add item"
         className="ml-2 mt-1 block pl-3 pr-6 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
       />
+
       <button
-        onClick={handleAddItem}
+        onClick={handleAddItem} // Call handleAddItem on button click
         className="rounded bg-gray-800 text-white w-[20rem] px-4 ml-6"
       >
-        {" "}
-        Add{" "}
+        Add
       </button>
     </div>
   );
-}
+};
+
+export default HeaderForm;
