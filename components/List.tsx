@@ -7,7 +7,7 @@ const List: React.FC = () => {
 
   // Function to add a new item to the list
   const addItemToList = (newItem: Item) => {
-    setItems([...items, newItem]);
+    setItems([...items, newItem]); // Add newItem to items state
   };
 
   // Function to delete an item from the list
@@ -17,18 +17,21 @@ const List: React.FC = () => {
   };
 
   return (
-    <div className="w-full flex-col flex gap-40 items-center mt-20 justify-center h-full">
+    <div className="w-full flex-col flex gap-2 items-center mt-20 justify-center h-full">
+      
       {items.map((item: Item) => (
         <div key={item.id} className="flex items-center space-x-4">
-          <span className={`text-lg ${item.packed ? "line-through" : ""}`}>
+          <span className={`text-sm ${item.packed ? "line-through" : ""}`}>
             {item.quantity} {item.description}
           </span>
           <button onClick={() => deleteItem(item.id)}>❌</button>
         </div>
       ))}
+      <div className="">
+        <HeaderForm addItemToList={addItemToList} />
+      </div>
 
       {/* Render HeaderForm and pass addItemToList as a prop */}
-      <HeaderForm addItemToList={addItemToList} />
     </div>
   );
 };
