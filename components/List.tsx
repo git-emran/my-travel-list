@@ -16,11 +16,23 @@ const List: React.FC = () => {
     setItems(updatedItems);
   };
 
+  // Function to toggle the packed state of an item
+  const toggleItemPacked = (itemId: number) => {
+    const updatedItems = items.map((item) =>
+      item.id === itemId ? { ...item, packed: !item.packed } : item
+    );
+    setItems(updatedItems);
+  };
+
   return (
     <div className="w-full flex-col flex gap-2 items-center mt-20 justify-center h-full">
-      
       {items.map((item: Item) => (
         <div key={item.id} className="flex items-center space-x-4">
+          <input
+            type="checkbox"
+            checked={item.packed}
+            onChange={() => toggleItemPacked(item.id)}
+          />
           <span className={`text-sm ${item.packed ? "line-through" : ""}`}>
             {item.quantity} {item.description}
           </span>
@@ -30,8 +42,6 @@ const List: React.FC = () => {
       <div className="">
         <HeaderForm addItemToList={addItemToList} />
       </div>
-
-      {/* Render HeaderForm and pass addItemToList as a prop */}
     </div>
   );
 };

@@ -25,6 +25,6 @@
      id: 3,
      description: "Charger",
      quantity: 1,
-     packed: true,
+     packed: false,
    },
  ];
