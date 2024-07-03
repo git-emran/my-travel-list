@@ -36,7 +36,7 @@ const HeaderForm: React.FC<HeaderFormProps> = ({ addItemToList }) => {
   };
 
   return (
-    <div className="flex flex-row gap-4 px-4 pb-4 pt-4">
+    <div className="flex flex-row gap-4 px-4">
       <label className="flex items-center text-center">Amount</label>
       <select
         value={quantity}
@@ -60,7 +60,7 @@ const HeaderForm: React.FC<HeaderFormProps> = ({ addItemToList }) => {
 
       <button
         onClick={handleAddItem} // Call handleAddItem on button click
-        className="rounded bg-gray-800 text-white w-[20rem] px-4 ml-6"
+        className=" flex flex-auto rounded bg-gray-800 text-white text-center items-center justify-center w-[5rem] px-14 "
       >
         Add
       </button>
